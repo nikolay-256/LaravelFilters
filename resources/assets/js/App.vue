@@ -3,6 +3,7 @@
         <div class="heading">
             <h1>Houses</h1>
         </div>
+
         <house-component
                 v-for="house in houses"
                 v-bind="house"
@@ -10,17 +11,18 @@
                 @update="update"
                 @delete="del"
         ></house-component>
-        <div>
-            <button @click="create">Add</button>
-        </div>
     </div>
 </template>
 
 <script>
-  function House({ id, color, name}) {
+  function House({id, name, price, bedrooms,bathrooms,storeys,garages}) {
     this.id = id;
-    this.color = color;
     this.name = name;
+    this.price = price;
+    this.bedrooms = bedrooms;
+    this.bathrooms = bathrooms;
+    this.storeys = storeys;
+    this.garages = garages;
   }
 
   import houseComponent from './components/Houses';
