@@ -2,40 +2,40 @@
 
 namespace App\Http\Controllers;
 
-use App\Crud;
+use App\House;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Faker\Generator;
 
-class CrudsController extends Controller
+class HousesController extends Controller
 {
     public function index()
     {
-        return response(Crud::all()->jsonSerialize(), Response::HTTP_OK);
+        return response(House::all()->jsonSerialize(), Response::HTTP_OK);
     }
 
     public function create(Generator $faker)
     {
-        $crud = new Crud();
-        $crud->name = $faker->lexify('????????');
-        $crud->color = $faker->boolean ? 'red' : 'green';
-        $crud->save();
+        $house = new House();
+        $house->name = $faker->lexify('????????');
+        $house->color = $faker->boolean ? 'red' : 'green';
+        $house->save();
 
-        return response($crud->jsonSerialize(), Response::HTTP_CREATED);
+        return response($house->jsonSerialize(), Response::HTTP_CREATED);
     }
 
     public function update(Request $request, $id)
     {
-        $crud = Crud::findOrFail($id);
-        $crud->color = $request->color;
-        $crud->save();
+        $house = House::findOrFail($id);
+        $house->color = $request->color;
+        $house->save();
 
         return response(null, Response::HTTP_OK);
     }
 
     public function destroy($id)
     {
-        Crud::destroy($id);
+        House::destroy($id);
 
         return response(null, Response::HTTP_OK);
     }

@@ -1,10 +1,10 @@
 <template>
-    <div class="crud">
+    <div class="house">
         <div class="col-1">
             <img :src="image"/>
         </div>
         <div class="col-2">
-            <h3>Name: {{ name | properCase }}</h3>
+            <h3>{{ name | properCase }}</h3>
             <select @change="update">
                 <option
                         v-for="col in [ 'red', 'green' ]"
@@ -35,6 +35,7 @@
     },
     props: ['id', 'color', 'name'],
     filters: {
+
       properCase(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
       }
@@ -42,7 +43,7 @@
   }
 </script>
 <style>
-    .crud {
+    .house {
         display: flex;
         margin: 1em 1em 1em 0;
         border: 1px solid #d1d1d1;
@@ -51,7 +52,7 @@
         background-color: white;
     }
 
-    .crud img {
+    .house img {
         height: 70px;
     }
 

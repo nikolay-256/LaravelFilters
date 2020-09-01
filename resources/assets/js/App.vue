@@ -3,13 +3,13 @@
         <div class="heading">
             <h1>Houses</h1>
         </div>
-        <crud-component
-                v-for="crud in cruds"
-                v-bind="crud"
-                :key="crud.id"
+        <house-component
+                v-for="house in houses"
+                v-bind="house"
+                :key="house.id"
                 @update="update"
                 @delete="del"
-        ></crud-component>
+        ></house-component>
         <div>
             <button @click="create">Add</button>
         </div>
@@ -17,18 +17,18 @@
 </template>
 
 <script>
-  function Crud({ id, color, name}) {
+  function House({ id, color, name}) {
     this.id = id;
     this.color = color;
     this.name = name;
   }
 
-  import CrudComponent from './components/Crud.vue';
+  import houseComponent from './components/Houses';
 
   export default {
     data() {
       return {
-        cruds: [],
+        houses: [],
         mute: false
       }
     },
@@ -36,26 +36,26 @@
       async create() {
         this.mute = true;
         const { data } = await window.axios.get('/api/houses/create');
-        this.cruds.push(new Crud(data));
+        this.houses.push(new House(data));
         this.mute = false;
       },
       async read() {
         this.mute = true;
         const { data } = await window.axios.get('/api/houses');
-        data.forEach(crud => this.cruds.push(new Crud(crud)));
+        data.forEach(house => this.houses.push(new House(house)));
         this.mute = false;
       },
       async update(id, color) {
         this.mute = true;
         await window.axios.put(`/api/houses/${id}`, { color });
-        this.cruds.find(crud => crud.id === id).color = color;
+        this.houses.find(house => house.id === id).color = color;
         this.mute = false;
       },
       async del(id) {
         this.mute = true;
         await window.axios.delete(`/api/houses/${id}`);
-        let index = this.cruds.findIndex(crud => crud.id === id);
-        this.cruds.splice(index, 1);
+        let index = this.houses.findIndex(house => house.id === id);
+        this.houses.splice(index, 1);
         this.mute = false;
       }
     },
@@ -65,7 +65,7 @@
       }
     },
     components: {
-      CrudComponent
+      houseComponent
     },
     created() {
       this.read();

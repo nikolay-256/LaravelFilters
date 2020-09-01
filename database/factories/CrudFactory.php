@@ -11,7 +11,7 @@
 |
 */
 
-$factory->define(App\Crud::class, function (Faker\Generator $faker) {
+$factory->define(App\House::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->lexify('????????'),
         'color' =>$faker->boolean ? 'red' : 'green'
