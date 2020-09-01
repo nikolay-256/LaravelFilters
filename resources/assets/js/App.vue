@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <div class="heading">
-            <h1>Cruds</h1>
+            <h1>Houses</h1>
         </div>
         <crud-component
                 v-for="crud in cruds"
@@ -35,25 +35,25 @@
     methods: {
       async create() {
         this.mute = true;
-        const { data } = await window.axios.get('/api/cruds/create');
+        const { data } = await window.axios.get('/api/houses/create');
         this.cruds.push(new Crud(data));
         this.mute = false;
       },
       async read() {
         this.mute = true;
-        const { data } = await window.axios.get('/api/cruds');
+        const { data } = await window.axios.get('/api/houses');
         data.forEach(crud => this.cruds.push(new Crud(crud)));
         this.mute = false;
       },
       async update(id, color) {
         this.mute = true;
-        await window.axios.put(`/api/cruds/${id}`, { color });
+        await window.axios.put(`/api/houses/${id}`, { color });
         this.cruds.find(crud => crud.id === id).color = color;
         this.mute = false;
       },
       async del(id) {
         this.mute = true;
-        await window.axios.delete(`/api/cruds/${id}`);
+        await window.axios.delete(`/api/houses/${id}`);
         let index = this.cruds.findIndex(crud => crud.id === id);
         this.cruds.splice(index, 1);
         this.mute = false;
