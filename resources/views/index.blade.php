@@ -18,16 +18,25 @@
             position: absolute;
         }
         #mute.on {
+            background: white;
             opacity: 0.7;
             z-index: 1000;
-            background: white;
             height: 100%;
             width: 100%;
+        }
+        #mute.on #loader{
+            background-image: url({{asset('/images/loader.gif')}});
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+            height: 128px;
+            width: 128px;
+            margin: 0 auto;
         }
     </style>
 </head>
 <body>
-<div id="mute"></div>
+<div id="mute" class="on"><div id="loader"></div></div>
 <div id="app"></div>
 <script src="js/app.js"></script>
 </body>
